@@ -1,4 +1,4 @@
-package com.myapp.diegogonzalez.memorymap;
+package com.myapp.diegogonzalez.memorymap.Utils;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,8 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Diego Gonzalez on 6/8/2015.
@@ -114,8 +113,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return memory;
     }
 
-    public List<Memory> getAllMemories() {
-        List<Memory> memories = new LinkedList<Memory>();
+    public ArrayList<Memory> getAllMemories() {
+        ArrayList<Memory> memories = new ArrayList<Memory>();
 
         // 1. Build the query
         String query = "SELECT * FROM " + TABLE_MEMORIES;

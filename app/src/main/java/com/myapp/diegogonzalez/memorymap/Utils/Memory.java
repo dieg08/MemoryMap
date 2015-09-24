@@ -1,4 +1,4 @@
-package com.myapp.diegogonzalez.memorymap;
+package com.myapp.diegogonzalez.memorymap.Utils;
 
 /**
  * Created by Diego Gonzalez on 6/8/2015.
