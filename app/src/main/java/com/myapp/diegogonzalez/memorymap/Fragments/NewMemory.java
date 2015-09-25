@@ -13,9 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.myapp.diegogonzalez.memorymap.R;
 import com.myapp.diegogonzalez.memorymap.Utils.Memory;
 import com.myapp.diegogonzalez.memorymap.Utils.MySQLiteHelper;
-import com.myapp.diegogonzalez.memorymap.R;
 
 import java.util.List;
 
@@ -127,26 +127,41 @@ public class NewMemory extends Fragment {
         // Used tutorial screen in app
         ShowcaseConfig config = new ShowcaseConfig();
 
-//        // Setting the delay time before the tutorial pops up
-//        config.setDelay(delay);
-//        config.setMaskColor(getResources().getColor(R.color.textColorPrimary));
-//        config.setContentTextColor(getResources().getColor(R.color.colorAccent));
-//        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(getActivity(), SHOWCASE_ID);
-//
-//        sequence.setConfig(config);
-//
-//        sequence.addSequenceItem(title,
-//                "Enter the title of your memory", "Got it");
-//
-//        sequence.addSequenceItem(note,
-//                "Enter your full memory here", "Got it");
-//
-//        sequence.addSequenceItem(button,
-//                "This button saves your memory", "Got it");
-//
-//        sequence.start();
+        // Setting the delay time before the tutorial pops up
+        config.setDelay(delay);
 
-        new MaterialShowcaseView.Builder(getActivity())
+        // Creating the sequence object that is used to show the showcases in order
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(getActivity(), SHOWCASE_ID);
+
+        // Attaching the config object that has information relevant to the sequence
+        sequence.setConfig(config);
+
+        // Making a showcase for each of the elements on the screen.
+        MaterialShowcaseView showcase1 = new MaterialShowcaseView.Builder(getActivity())
+                .setTarget(title)
+                .setDismissText("Got it")
+                .setContentText("This is where you enter the title of your memory")
+                .setContentTextColor(getResources().getColor(R.color.colorAccent))
+                .setMaskColour(getResources().getColor(R.color.textColorPrimary))
+                .setDelay(delay)
+                .setRadius(150)
+                .setUseAutoRadius(false)
+                .singleUse(SHOWCASE_ID)
+                .build();
+
+        MaterialShowcaseView showcase2 = new MaterialShowcaseView.Builder(getActivity())
+                .setTarget(note)
+                .setDismissText("Got it")
+                .setContentText("This is where you enter your actual memory")
+                .setContentTextColor(getResources().getColor(R.color.colorAccent))
+                .setMaskColour(getResources().getColor(R.color.textColorPrimary))
+                .setDelay(delay)
+                .setRadius(150)
+                .setUseAutoRadius(false)
+                .singleUse(SHOWCASE_ID)
+                .build();
+
+        MaterialShowcaseView showcase3 = new MaterialShowcaseView.Builder(getActivity())
                 .setTarget(button)
                 .setDismissText("Got it")
                 .setContentText("This button saves your memory")
@@ -154,6 +169,14 @@ public class NewMemory extends Fragment {
                 .setMaskColour(getResources().getColor(R.color.textColorPrimary))
                 .setDelay(delay)
                 .singleUse(SHOWCASE_ID)
-                .show();
+                .build();
+
+        // Adding the showcases to the tutorial sequence
+        sequence.addSequenceItem(showcase1);
+        sequence.addSequenceItem(showcase2);
+        sequence.addSequenceItem(showcase3);
+
+        // Starting the sequence
+        sequence.start();
     }
 }
